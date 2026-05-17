@@ -1,44 +1,130 @@
 package web.service;
 
+import java.time.LocalDate;
+
+/**
+ * Service class containing all STEM game logic.
+ * Includes math, date, and science questions.
+ */
 public class MathQuestionService {
 
-    public static Double q1Addition(String num1, String num2) {
+    // ======================================================
+    // VALIDATE NUMBERS
+    // ======================================================
+
+    private static Double parseNumber(String value) {
+
         try {
-            if (num1 == null || num2 == null || num1.isEmpty() || num2.isEmpty()) {
+
+            if (value == null || value.isEmpty()) {
                 return null;
             }
-            double a = Double.parseDouble(num1);
-            double b = Double.parseDouble(num2);
-            return a + b;
-        } catch (NumberFormatException e) {
+
+            return Double.parseDouble(value);
+
+        } catch (Exception e) {
+
             return null;
         }
     }
 
-    public static Double q2Subtraction(String num1, String num2) {
+    // ======================================================
+    // ADDITION
+    // ======================================================
+
+    public static Double q1Addition(
+            String num1,
+            String num2) {
+
+        Double a = parseNumber(num1);
+        Double b = parseNumber(num2);
+
+        if (a == null || b == null) {
+            return null;
+        }
+
+        return a + b;
+    }
+
+    // ======================================================
+    // SUBTRACTION
+    // ======================================================
+
+    public static Double q2Subtraction(
+            String num1,
+            String num2) {
+
+        Double a = parseNumber(num1);
+        Double b = parseNumber(num2);
+
+        if (a == null || b == null) {
+            return null;
+        }
+
+        return a - b;
+    }
+
+    // ======================================================
+    // MULTIPLICATION
+    // ======================================================
+
+    public static Double q3Multiplication(
+            String num1,
+            String num2) {
+
+        Double a = parseNumber(num1);
+        Double b = parseNumber(num2);
+
+        if (a == null || b == null) {
+            return null;
+        }
+
+        return a * b;
+    }
+
+    // ======================================================
+    // NEXT DAY
+    // ======================================================
+
+    public static String nextDay(String date) {
+
         try {
-            if (num1 == null || num2 == null || num1.isEmpty() || num2.isEmpty()) {
-                return null;
-            }
-            double a = Double.parseDouble(num1);
-            double b = Double.parseDouble(num2);
-            return a - b;
-        } catch (NumberFormatException e) {
+
+            return LocalDate.parse(date)
+                    .plusDays(1)
+                    .toString();
+
+        } catch (Exception e) {
+
             return null;
         }
     }
 
-    // YOU MUST ADD THIS (Q3)
-    public static Double q3Multiplication(String num1, String num2) {
+    // ======================================================
+    // PREVIOUS WEEK
+    // ======================================================
+
+    public static String previousWeek(String date) {
+
         try {
-            if (num1 == null || num2 == null || num1.isEmpty() || num2.isEmpty()) {
-                return null;
-            }
-            double a = Double.parseDouble(num1);
-            double b = Double.parseDouble(num2);
-            return a * b;
-        } catch (NumberFormatException e) {
+
+            return LocalDate.parse(date)
+                    .minusDays(7)
+                    .toString();
+
+        } catch (Exception e) {
+
             return null;
         }
+    }
+
+    // ======================================================
+    // SCIENCE QUESTION
+    // ======================================================
+
+    public static boolean boilingPoint(String answer) {
+
+        return answer != null
+                && answer.trim().equals("100");
     }
 }
